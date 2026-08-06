@@ -1,0 +1,292 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>3D Models - Brooks Wimer</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/project-detail.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+		<!-- Three.js dependencies -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/EXRLoader.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.min.js"></script>
+		<style>
+			.project-content {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2em;
+				color: #ffffff;
+			}
+
+			.project-header {
+				text-align: center;
+				margin-bottom: 2em;
+			}
+
+			.feature-section {
+				margin: 2em 0;
+			}
+
+			.feature-section h2 {
+				color: #ffffff;
+				border-bottom: 2px solid #ffffff;
+				padding-bottom: 0.5em;
+				margin-bottom: 1em;
+			}
+
+			.feature-list {
+				list-style: none;
+				padding-left: 0;
+				color: #ffffff;
+			}
+
+			.feature-list li {
+				margin: 1em 0;
+				padding-left: 1.5em;
+				position: relative;
+			}
+
+			.feature-list li:before {
+				content: "•";
+				position: absolute;
+				left: 0;
+				color: #ffffff;
+			}
+
+			.tech-stack {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				margin: 1em 0;
+			}
+
+			.tech-item {
+				background: rgba(255, 255, 255, 0.1);
+				color: #ffffff;
+				padding: 0.5em 1em;
+				border-radius: 4px;
+				font-size: 0.9em;
+			}
+
+			/* Gallery: side-by-side on desktop, stacked on mobile */
+			.model-gallery {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 1.5em;
+				margin: 1em 0;
+			}
+
+			@media (min-width: 1024px) {
+				.model-gallery {
+					grid-template-columns: 1fr 1fr;
+					align-items: start;
+				}
+			}
+
+			.model-viewer-container {
+				background: rgba(255, 255, 255, 0.1);
+				padding: 1em;
+				border-radius: 8px;
+				text-align: center;
+			}
+
+			#modelCanvas {
+				width: 100% !important;
+				height: 560px !important;
+				display: block;
+				border-radius: 4px;
+				box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+			}
+
+			@media (max-width: 1023px) {
+				#modelCanvas {
+					height: 420px !important;
+				}
+			}
+
+			.image-container {
+				background: rgba(255, 255, 255, 0.1);
+				padding: 1em;
+				border-radius: 8px;
+				text-align: center;
+			}
+
+			.image-container img {
+				width: 100%;
+				height: 560px;
+				object-fit: cover;
+				border-radius: 4px;
+				box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+				display: block;
+			}
+
+			@media (max-width: 1023px) {
+				.image-container img {
+					height: auto;
+				}
+			}
+
+			.image-container p {
+				margin-top: 1em;
+				font-style: italic;
+				color: #ffffff;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="content">
+							<div class="inner">
+								<h1>3D Building Visualization</h1>
+								<p>Interactive digital architectural models</p>
+							</div>
+						</div>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="project-content">
+							<section class="feature-section">
+								<h2>Project Overview</h2>
+								<p>
+									During the NFT boom, I was inspired to digitize one of my dad's architectural designs. My dad is an architect known for designing massive structures—skyscrapers, stadiums, civic buildings—with a philosophy of buildings as bold artistic statements. He creates multiple representations of his designs: physical 3D models, 2D geometric prints that capture essence without detail, and sketches. I wanted to explore his work in the digital space using 3D modeling and rendering.
+								</p>
+								<p>
+									This project taught me 3D modeling workflows, GLTF asset preparation, HDRI environment lighting, and real-time rendering optimization. It remains incomplete—only one building is rendered, not his full body of work—and I never pursued the original plan to make it shareable in platforms like Roblox. But I still plan to expand this someday, rendering his entire catalog of designs as interactive 3D experiences.
+								</p>
+							</section>
+
+							<section class="feature-section">
+								<h2>Interactive 3D Model Viewer & Example Design</h2>
+								<div class="model-gallery">
+									<div class="model-viewer-container">
+										<canvas id="modelCanvas"></canvas>
+										<p style="margin-top: 1em;">Use your mouse to rotate, zoom, and pan the 3D model</p>
+									</div>
+									<div class="image-container">
+										<img src="/images/Cayan_Tower.jpg" alt="Cayan Tower Design" />
+										<p>The Cayan Tower - One of the architectural designs being transformed into a 3D model</p>
+									</div>
+								</div>
+							</section>
+
+							<section class="feature-section">
+								<h2>Technical Stack</h2>
+								<ul class="feature-list">
+									<li>Modeled in Blender; exported to glTF format for Three.js</li>
+									<li>HDRI environment provides photorealistic lighting without baked shadows</li>
+									<li>OrbitControls enable intuitive 3D navigation</li>
+									<li>Real-time rendering at 60 FPS on desktop browsers</li>
+								</ul>
+							</section>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p><a href="https://github.com/BrooksWimer/NFT_BlenderModelingProject" target="_blank">View Project on GitHub</a></p>
+						<p class="copyright">&copy; Brooks Wimer. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script src="/assets/js/project-detail.js"></script>
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					const canvas = document.getElementById('modelCanvas');
+					if (!canvas) {
+						console.error('Canvas element not found!');
+						return;
+					}
+
+					// Dimensions — resolved before anything else that needs them
+					const container = document.querySelector('.model-viewer-container');
+					const containerWidth = container ? container.clientWidth : 600;
+					const containerHeight = window.innerWidth >= 1024 ? 560 : 420;
+
+					// Scene setup
+					const scene = new THREE.Scene();
+
+					// Camera setup
+					const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+					camera.position.set(0, 30, 30);
+					camera.lookAt(0, 0, 0);
+
+					// Renderer setup
+
+					const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('modelCanvas'), antialias: true });
+					renderer.setSize(containerWidth, containerHeight);
+					renderer.setPixelRatio(window.devicePixelRatio);
+
+					// Lights
+					const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+					scene.add(ambientLight);
+
+					const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+					directionalLight.position.set(5, 10, 7.5);
+					scene.add(directionalLight);
+
+					// OrbitControls
+					const controls = new THREE.OrbitControls(camera, renderer.domElement);
+					controls.enableDamping = true;
+					controls.dampingFactor = 0.05;
+					controls.minDistance = 2;
+					controls.maxDistance = 500;
+					controls.target.set(5, 10, 0);
+
+					// HDRI Environment
+					const exrLoader = new THREE.EXRLoader();
+					exrLoader.load('/projects/3d-models/rogland_clear_night_4k.exr', (texture) => {
+						texture.mapping = THREE.EquirectangularReflectionMapping;
+						scene.environment = texture;
+						scene.background = texture;
+					});
+
+					// GLTF Model
+					const loader = new THREE.GLTFLoader();
+					loader.load('/projects/3d-models/InfinityTower.py.glb', (gltf) => {
+						const model = gltf.scene;
+						model.scale.set(0.1, 0.1, 0.1);
+						model.position.set(0, 0, 0);
+						scene.add(model);
+					});
+
+					// Animation loop
+					function animate() {
+						requestAnimationFrame(animate);
+						controls.update();
+						renderer.render(scene, camera);
+					}
+					animate();
+
+					// Handle resizing
+					window.addEventListener('resize', () => {
+						const newContainer = document.querySelector('.model-viewer-container');
+						const newWidth = newContainer ? newContainer.clientWidth : 600;
+						const newHeight = window.innerWidth >= 1024 ? 560 : 420;
+						renderer.setSize(newWidth, newHeight);
+						camera.aspect = newWidth / newHeight;
+						camera.updateProjectionMatrix();
+					});
+				});
+			</script>
+
+	</body>
+</html>

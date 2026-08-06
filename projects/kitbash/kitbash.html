@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Customizable Game Controller - Brooks Wimer</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/project-detail.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+		<style>
+			.project-content {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2em;
+				color: #ffffff;
+			}
+
+			.project-header {
+				text-align: center;
+				margin-bottom: 2em;
+			}
+
+			.feature-section {
+				margin: 2em 0;
+			}
+
+			.feature-section h2 {
+				color: #ffffff;
+				border-bottom: 2px solid #ffffff;
+				padding-bottom: 0.5em;
+				margin-bottom: 1em;
+			}
+
+			.feature-list {
+				list-style: none;
+				padding-left: 0;
+				color: #ffffff;
+			}
+
+			.feature-list li {
+				margin: 1em 0;
+				padding-left: 1.5em;
+				position: relative;
+			}
+
+			.feature-list li:before {
+				content: "•";
+				position: absolute;
+				left: 0;
+				color: #ffffff;
+			}
+
+			.tech-stack {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				margin: 1em 0;
+			}
+
+			.tech-item {
+				background: rgba(255, 255, 255, 0.1);
+				color: #ffffff;
+				padding: 0.5em 1em;
+				border-radius: 4px;
+				font-size: 0.9em;
+			}
+
+			.status-section {
+				background: rgba(255, 255, 255, 0.1);
+				padding: 2em;
+				border-radius: 8px;
+				margin: 2em 0;
+				color: #ffffff;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="content">
+							<div class="inner">
+								<h1>Customizable Wireless Game Controller App</h1>
+								<p>Class Capstone Project (Complete)</p>
+							</div>
+						</div>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="project-content">
+							<section class="feature-section">
+								<h2>Project Overview</h2>
+								<p>KITBASH was my CS501 final capstone project—a customizable wireless game controller application allowing users to create and configure personalized controller layouts. The application provides an intuitive interface for mapping buttons, joysticks, and other controls.</p>
+							</section>
+
+							<section class="feature-section">
+								<h2>Demo Video</h2>
+								<div style="position: relative; width: 100%; padding-top: 56.25%; margin: 2em 0;">
+									<iframe 
+										style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
+										src="https://www.youtube.com/embed/kZCrUi_ZpNI"
+										title="Kitbash Demo"
+										frameborder="0"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen
+									></iframe>
+								</div>
+							</section>
+
+							<section class="feature-section">
+								<h2>Key Features</h2>
+								<ul class="feature-list">
+									<li><strong>Drag-and-drop Controller Builder:</strong> Create layouts with components like buttons, D-pads, and joysticks. Components are highly customizable in terms of size, location, and function.</li>
+									<li><strong>Cloud Backup with Firebase:</strong> Layouts are stored in Firebase using XML-based schemas. Offline changes are buffered and synced when internet becomes available.</li>
+									<li><strong>Voice Recognition & Motion Control:</strong> Voice commands (e.g., "jump", "shoot") can activate controls in real-time. Device orientation is tracked using a weighted fusion of gyroscope and accelerometer data.</li>
+									<li><strong>Keyboard & Mouse Simulation:</strong> A Python listener script interprets incoming messages and simulates key presses or mouse movements using the keyboard and mouse libraries.</li>
+									<li><strong>Google Cloud Relay Server:</strong> Hosted relay server on Google Cloud to overcome WiFi restrictions and forward messages from the app to the local client script.</li>
+								</ul>
+							</section>
+
+							<section class="feature-section">
+								<h2>Technical Architecture</h2>
+								<div class="tech-stack">
+									<span class="tech-item">Android Jetpack Compose</span>
+									<span class="tech-item">Firebase Firestore</span>
+									<span class="tech-item">Firebase Auth</span>
+									<span class="tech-item">Python WebSocket</span>
+									<span class="tech-item">SpeechRecognizer</span>
+									<span class="tech-item">Kotlin Coroutines</span>
+									<span class="tech-item">Google Sign-In API</span>
+								</div>
+							</section>
+
+							<section class="feature-section">
+								<h2>Key Contributions</h2>
+								<ul class="feature-list">
+									<li>Designed and implemented the layout editor UI with custom graphics</li>
+									<li>Refactored the WebSocket integration to support continuous signals</li>
+									<li>Improved resilience to disconnection by buffering Firebase writes</li>
+									<li>Set up the cloud relay server on Google Cloud</li>
+									<li>Modified the client/server communication logic</li>
+								</ul>
+							</section>
+
+							<section class="status-section">
+								<h2>Current Status</h2>
+								<p>The app is fully functional and supports streaming input from Android to any computer running the listener script. It is stable and responsive. Development has been paused after the capstone—this was a successful school project that achieved its goals. Future features (Bluetooth integration, rooted device support, trackpad) remain as ideas but are not actively being pursued at this time.</p>
+							</section>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p><a href="https://github.com/HamidAlakbarli/Custom-Wireless-Game-Controller" target="_blank">View Project on GitHub</a></p>
+						<p class="copyright">&copy; Brooks Wimer. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script src="/assets/js/project-detail.js"></script>
+
+	</body>
+</html> 

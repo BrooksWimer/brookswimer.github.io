@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+  <title>Completing WHOOP connection</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { display: grid; min-height: 100vh; margin: 0; place-items: center; background: #0b0d10; color: #f3f5f7; }
+    main { width: min(34rem, calc(100% - 3rem)); }
+    p { color: #b8c0ca; line-height: 1.6; }
+    a { color: #86c5ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Completing WHOOP connection</h1>
+    <p id="status">Returning authorization to the Health service on this computer…</p>
+    <p><a id="continue" hidden>Continue to Health</a></p>
+  </main>
+  <script>
+    (() => {
+      const incoming = new URLSearchParams(window.location.search);
+      const target = new URL('http://127.0.0.1:3857/oauth/whoop/callback');
+      const code = incoming.get('code');
+      const state = incoming.get('state');
+      const error = incoming.get('error');
+      const status = document.getElementById('status');
+      const link = document.getElementById('continue');
+
+      if (!state || (!code && !error)) {
+        status.textContent = 'This page is only used to finish a WHOOP authorization request.';
+        return;
+      }
+
+      target.searchParams.set('state', state);
+      if (code) target.searchParams.set('code', code);
+      if (error) target.searchParams.set('error', error);
+
+      link.href = target.toString();
+      link.hidden = false;
+      window.location.replace(target.toString());
+    })();
+  </script>
+</body>
+</html>

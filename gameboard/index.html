@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b1014">
+  <title>Still Moving — Gameboard studies</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 50% -20%,#26333a 0,#0b1014 42%); color: #e7e9e5; }
+    main { max-width: 1320px; margin: 0 auto; padding: clamp(24px, 4vw, 56px); }
+    .eyebrow { margin: 0 0 14px; color: #9baea9; letter-spacing: .22em; text-transform: uppercase; font-size: 11px; font-weight: 700; }
+    h1 { margin: 0; font-family: Georgia, serif; font-weight: 400; letter-spacing: -.06em; font-size: clamp(46px, 7vw, 94px); line-height: .98; }
+    .intro { max-width: 690px; color: #aeb9b5; font-size: clamp(15px, 1.5vw, 18px); line-height: 1.55; margin: 22px 0 42px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    article { min-width: 0; border: 1px solid #344046; background: #10171b; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px #0005; }
+    .preview { aspect-ratio: 1; background: #000; position: relative; overflow: hidden; }
+    iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; }
+    .preview::after { content: "LIVE PREVIEW"; position: absolute; left: 14px; bottom: 14px; padding: 5px 7px; border-radius: 3px; background: #071114cc; color: #d5e5e0; font-size: 9px; font-weight: 700; letter-spacing: .18em; }
+    .detail { padding: 20px 20px 22px; }
+    .number { color: #7c908d; font-size: 11px; letter-spacing: .16em; }
+    h2 { margin: 8px 0 8px; font-family: Georgia, serif; font-weight: 400; font-size: 29px; letter-spacing: -.03em; }
+    .description { color: #aeb9b5; font-size: 14px; line-height: 1.5; min-height: 63px; margin: 0 0 16px; }
+    .status { display: inline-block; padding: 5px 8px; border: 1px solid #4c625d; border-radius: 99px; color: #a8d1bd; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    .tune { color: #aab6b2; font-size: 12px; line-height: 1.55; margin: 15px 0 18px; }
+    .tune strong { color: #dae1dc; font-weight: 600; }
+    .links { display: flex; gap: 8px; flex-wrap: wrap; }
+    a.button { text-decoration: none; background: #d9e9df; color: #10201a; padding: 11px 14px; border-radius: 7px; font-size: 13px; font-weight: 700; }
+    a.button.secondary { background: transparent; color: #d9e9df; border: 1px solid #52655e; }
+    a.button:hover { filter: brightness(1.12); }
+    footer { margin-top: 42px; padding-top: 19px; border-top: 1px solid #334047; color: #91a19d; font-size: 13px; line-height: 1.5; }
+    footer a { color: #c2d7ce; }
+    @media(max-width: 900px) { .grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+    @media(max-width: 600px) { .grid { grid-template-columns: 1fr; } .description { min-height: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Still Moving / autonomous games</p>
+    <h1>One board.<br>Different lives.</h1>
+    <p class="intro">A visual shelf for the self-playing game studies. Each preview is alive. Open one to see its entire 96 × 96 light field without the gallery around it, then we can shape that game's movement, colors, pacing, and rules on its own terms.</p>
+    <section class="grid" aria-label="Game studies">
+      <article>
+        <div class="preview"><iframe src="./fixed-shooter/?seed=20260927" title="Live preview of fixed shooter" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="detail">
+          <span class="number">STUDY 01 / FORMATION</span>
+          <h2>Fixed shooter</h2>
+          <p class="description">One autonomous defender tracks a descending field, chooses targets, fires, dodges, and begins again.</p>
+          <span class="status">Working prototype</span>
+          <p class="tune"><strong>To tune:</strong> formation rhythm, risk, response, palette, and the feeling of each restart.</p>
+          <div class="links"><a class="button" href="./fixed-shooter/?seed=20260927" target="_blank" rel="noopener">Open full game ↗</a><a class="button secondary" href="./fixed-shooter/?seed=20260927&amp;mode=pixel" target="_blank" rel="noopener">Pixel view ↗</a></div>
+        </div>
+      </article>
+      <article>
+        <div class="preview"><iframe src="./2048/?seed=2048" title="Live preview of autonomous 2048" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="detail">
+          <span class="number">STUDY 02 / MERGE</span>
+          <h2>2048</h2>
+          <p class="description">The existing expectimax player makes and remakes a field of numbered tiles, now with the entire grid devoted to play.</p>
+          <span class="status">Full-field study</span>
+          <p class="tune"><strong>To tune:</strong> tile language, spacing, decision tempo, and the drama of a merge.</p>
+          <div class="links"><a class="button" href="./2048/?seed=2048" target="_blank" rel="noopener">Open full game ↗</a><a class="button secondary" href="./2048/?seed=2048&amp;mode=pixel" target="_blank" rel="noopener">Pixel view ↗</a></div>
+        </div>
+      </article>
+      <article>
+        <div class="preview"><iframe src="./snake/?seed=271828" title="Live preview of snake arena" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="detail">
+          <span class="number">STUDY 03 / PURSUIT</span>
+          <h2>Snake arena</h2>
+          <p class="description">Three independent snakes pursue food lights and navigate one another across the whole surface.</p>
+          <span class="status">Full-field study</span>
+          <p class="tune"><strong>To tune:</strong> number of snakes, trail shape, food density, movement character, and collisions.</p>
+          <div class="links"><a class="button" href="./snake/?seed=271828" target="_blank" rel="noopener">Open full game ↗</a><a class="button secondary" href="./snake/?seed=271828&amp;mode=pixel" target="_blank" rel="noopener">Pixel view ↗</a></div>
+        </div>
+      </article>
+    </section>
+    <footer>These are software studies, not photographed hardware or approved commercial games. In each full-game view: Space pauses, R restarts, N changes seed, and D switches LED/pixel view.</footer>
+  </main>
+</body>
+</html>

@@ -3,12 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
   <title>2048</title>
-  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}canvas{display:block;width:100vw;height:100vh}</style>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #000; color: #e7e9e5; }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 2px solid #e7e9e5; outline-offset: 2px; }
+    .site { display: grid; grid-template-columns: minmax(0, 1fr) 310px; height: 100dvh; min-height: 600px; background: #000; }
+    .site.closed { grid-template-columns: 1fr; min-height: 0; }
+    .stage { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; overflow: hidden; background: #000; }
+    canvas { display: block; }
+    .appearance-button { position: absolute; top: 16px; right: 16px; z-index: 1; background: #111b20ee; border: 1px solid #53635f; border-radius: 7px; color: #e7e9e5; padding: 10px 13px; font-size: 13px; }
+    .settings { min-width: 0; overflow-y: auto; background: #10171b; border-left: 1px solid #344046; padding: 23px 20px 20px; }
+    .site.closed .settings { display: none; }
+    .settings-header { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+    .eyebrow { color: #95aaa4; letter-spacing: .18em; text-transform: uppercase; font-size: 10px; font-weight: 500; }
+    h1 { font: 400 30px Georgia, serif; letter-spacing: -.04em; margin: 4px 0 0; }
+    h2 { font-size: 12px; font-weight: 500; color: #bbc9c2; margin: 25px 0 10px; text-transform: uppercase; letter-spacing: .12em; }
+    .close { border: 0; background: transparent; color: #c2d1ca; font-size: 20px; padding: 0 5px; }
+    .palette-list { display: grid; gap: 8px; }
+    .palette-button { display: block; width: 100%; text-align: left; background: #192228; border: 1px solid #344046; border-radius: 8px; color: #e7e9e5; padding: 11px 10px; }
+    .palette-button[aria-pressed="true"] { border-color: #c3d8cb; background: #22302f; }
+    .palette-title { display: block; font-size: 13px; margin-bottom: 8px; }
+    .mini-swatches { display: grid; grid-template-columns: repeat(11, 1fr); gap: 3px; }
+    .mini-swatches span { display: block; aspect-ratio: 1; background: var(--sample); }
+    .selected-detail { margin: 17px 0 0; color: #b9c6bf; font-size: 12px; line-height: 1.5; }
+    @media (max-width: 700px) {
+      .site { display: block; height: auto; min-height: 100dvh; }
+      .stage { height: min(100vw, 66dvh); min-height: 320px; }
+      .site.closed .stage { height: 100dvh; }
+      .settings { overflow: visible; border-left: 0; border-top: 1px solid #344046; }
+    }
+  </style>
 </head>
 <body>
-  <canvas aria-label="Self-playing 2048, filling a 96 by 96 LED field"></canvas>
+  <div id="gameboard-2048" class="site">
+    <main class="stage" aria-label="2048 game">
+      <canvas aria-label="Self-playing 2048, filling a 96 by 96 LED field"></canvas>
+      <button class="appearance-button" type="button" aria-label="Open appearance settings">Appearance</button>
+    </main>
+    <aside class="settings" aria-label="2048 appearance settings">
+      <div class="settings-header"><div><div class="eyebrow">Still Moving / 2048</div><h1>Appearance</h1></div><button class="close" type="button" aria-label="Close appearance settings">×</button></div>
+      <h2>Color palette</h2>
+      <div class="palette-list" role="group" aria-label="Choose a 2048 palette"></div>
+      <p class="selected-detail">Each palette follows the tile sequence from 2 to 2048. Small numbers stay a muted shade of their tile.</p>
+    </aside>
+  </div>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

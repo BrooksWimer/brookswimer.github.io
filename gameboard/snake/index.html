@@ -3,12 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
   <title>Snake arena</title>
-  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}canvas{display:block;width:100vw;height:100vh}</style>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #000; color: #e7e9e5; }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 2px solid #e7e9e5; outline-offset: 2px; }
+    .site { display: grid; grid-template-columns: minmax(0, 1fr) 310px; height: 100dvh; min-height: 600px; background: #000; }
+    .site.closed { grid-template-columns: 1fr; min-height: 0; }
+    .stage { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; overflow: hidden; background: #000; }
+    canvas { display: block; }
+    .appearance-button { position: absolute; top: 16px; right: 16px; z-index: 1; background: #111b20ee; border: 1px solid #53635f; border-radius: 7px; color: #e7e9e5; padding: 10px 13px; font-size: 13px; }
+    .settings { min-width: 0; overflow-y: auto; background: #10171b; border-left: 1px solid #344046; padding: 23px 20px 20px; }
+    .site.closed .settings { display: none; }
+    .settings-header { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+    .eyebrow { color: #95aaa4; letter-spacing: .18em; text-transform: uppercase; font-size: 10px; font-weight: 500; }
+    h1 { font: 400 30px Georgia, serif; letter-spacing: -.04em; margin: 4px 0 0; }
+    h2 { font-size: 12px; font-weight: 500; color: #bbc9c2; margin: 24px 0 10px; text-transform: uppercase; letter-spacing: .12em; }
+    .close { border: 0; background: transparent; color: #c2d1ca; font-size: 20px; padding: 0 5px; }
+    .palette-list { display: grid; gap: 7px; }
+    .palette-button { display: block; width: 100%; text-align: left; background: #192228; border: 1px solid #344046; border-radius: 8px; color: #e7e9e5; padding: 9px 10px; }
+    .palette-button[aria-pressed="true"] { border-color: #c3d8cb; background: #22302f; }
+    .palette-title { display: block; font-size: 13px; margin-bottom: 7px; }
+    .mini-swatches { display: grid; grid-template-columns: repeat(11, 1fr); gap: 3px; }
+    .mini-swatches span { display: block; aspect-ratio: 1; background: var(--sample); }
+    .food-line { display: flex; align-items: center; gap: 9px; margin: 14px 0 0; font-size: 12px; color: #c8d5ce; }
+    .food-swatch { width: 18px; height: 18px; background: var(--food); flex: 0 0 auto; }
+    .snake-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .snake-tab { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; border: 1px solid #344046; border-radius: 7px; background: #192228; color: #e7e9e5; font-size: 12px; padding: 9px 4px; }
+    .snake-tab[aria-pressed="true"] { border-color: #c3d8cb; background: #22302f; }
+    .snake-dot { width: 20px; height: 20px; background: var(--snake); }
+    .choose-label { color: #c8d5ce; font-size: 12px; margin: 12px 0 7px; }
+    .color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; }
+    .color-choice { display: grid; place-items: center; min-height: 43px; border: 1px solid #52615d; border-radius: 5px; background: #192228; padding: 5px; }
+    .color-choice[aria-pressed="true"] { border-color: #e7e9e5; }
+    .color-choice span { display: block; width: 25px; height: 25px; background: var(--choice); }
+    @media (max-width: 700px) {
+      .site { display: block; height: auto; min-height: 100dvh; }
+      .stage { height: min(100vw, 66dvh); min-height: 320px; }
+      .site.closed .stage { height: 100dvh; }
+      .settings { overflow: visible; border-left: 0; border-top: 1px solid #344046; }
+    }
+  </style>
 </head>
 <body>
-  <canvas aria-label="Three autonomous snakes filling a 96 by 96 LED field"></canvas>
+  <div id="snake-arena-site" class="site">
+    <main class="stage" aria-label="Snake Arena game">
+      <canvas aria-label="Three autonomous snakes filling a 96 by 96 LED field"></canvas>
+      <button class="appearance-button" type="button" aria-label="Open appearance settings">Appearance</button>
+    </main>
+    <aside class="settings" aria-label="Snake Arena appearance settings">
+      <div class="settings-header"><div><div class="eyebrow">Still Moving / Snake Arena</div><h1>Appearance</h1></div><button class="close" type="button" aria-label="Close appearance settings">×</button></div>
+      <h2>Palette</h2>
+      <div class="palette-list" role="group" aria-label="Choose a palette"></div>
+      <div class="food-line"><span class="food-swatch" aria-hidden="true"></span><span>Collectible lights · reserved color</span></div>
+      <h2>Snake colors</h2>
+      <div class="snake-tabs" role="group" aria-label="Choose snake to color"></div>
+      <div class="choose-label">Choose a color for <span class="active-snake-label">Snake 1</span></div>
+      <div class="color-grid" role="group" aria-label="Available snake colors"></div>
+    </aside>
+  </div>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

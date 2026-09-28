@@ -1,4 +1,4 @@
-export function createLedView(canvas, size = 96) {
+export function createLedView(canvas, size = 96, viewport = null) {
   const context = canvas.getContext("2d", { alpha: false });
   const buffer = document.createElement("canvas");
   buffer.width = buffer.height = size;
@@ -6,10 +6,13 @@ export function createLedView(canvas, size = 96) {
 
   function fit() {
     const ratio = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = Math.round(innerWidth * ratio);
-    canvas.height = Math.round(innerHeight * ratio);
-    canvas.style.width = `${innerWidth}px`;
-    canvas.style.height = `${innerHeight}px`;
+    const width = viewport ? viewport.clientWidth : innerWidth;
+    const height = viewport ? viewport.clientHeight : innerHeight;
+    if (!width || !height) return;
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
   }
 
   function draw(pixels, mode = "led") {
@@ -36,6 +39,7 @@ export function createLedView(canvas, size = 96) {
   }
 
   addEventListener("resize", fit);
+  if (viewport) new ResizeObserver(fit).observe(viewport);
   fit();
   return { draw, fit };
 }
